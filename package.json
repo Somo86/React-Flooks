@@ -1,0 +1,40 @@
+{
+  "name": "react-redux-hooks",
+  "version": "1.0.0",
+  "description": "A little library for manage global state using React Hooks",
+  "main": "dist/index.js",
+  "module": "dist/index.es.js",
+  "jsnext:main": "dist/index.es.js",
+  "types": "dist/index.d.ts",
+  "directories": {
+    "example": "examples"
+  },
+  "scripts": {
+    "start": "rollup -c -w",
+    "build": "rollup -c",
+    "prettier": "prettier --config .prettierrc --write \"{src,example}/**/*.{js,ts,tsx}\"",
+    "test": "npm run test"
+  },
+  "author": "Albert Somoza",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/react": "^16.8.10",
+    "rollup": "^1.7.4",
+    "rollup-plugin-commonjs": "^9.2.2",
+    "rollup-plugin-cpy": "^1.1.0",
+    "rollup-plugin-node-resolve": "^4.0.1",
+    "rollup-plugin-peer-deps-external": "^2.2.0",
+    "rollup-plugin-typescript2": "^0.20.1",
+    "rollup-plugin-url": "^2.2.0",
+    "react": "^16.8.3",
+    "react-dom": "^16.8.3",
+    "typescript": "^3.3.1"
+  },
+  "peerDependencies": {
+    "prop-types": "^15.5.4",
+    "react": "^16.8.1"
+  },
+  "files": [
+    "dist"
+  ]
+}
