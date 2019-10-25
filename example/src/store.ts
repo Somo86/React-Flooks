@@ -1,4 +1,4 @@
-import {createStore, combineReducers} from './redux-react-hook';
+import {createStore, combineReducers, applyMiddleWare, asyncMiddleware} from './redux-react-hook';
 import clickReducer from './redux-react-hook/reducers/clickReducer';
 
 const reducers = combineReducers({
@@ -9,5 +9,10 @@ export const {
   Provider,
   store,
   useRedux,
-  useSelect
-} = createStore(reducers, {click: null});
+  useSelect,
+  useAsyncRedux
+} = createStore(
+  reducers,
+  {click: null},
+  applyMiddleWare(asyncMiddleware)
+);

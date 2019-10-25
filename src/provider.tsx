@@ -13,9 +13,11 @@ export default function Provider(Context) {
     const [state, dispatch] = useReducer(reducer, preloadedState);
 
     useEffect(() => {
+      
       dispatch({
         type: INITIAL_ACTION
-      })
+      });
+
     }, []);
 
     return (
@@ -25,5 +27,4 @@ export default function Provider(Context) {
     );
 
   };
-
 }

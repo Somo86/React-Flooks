@@ -1,13 +1,24 @@
 import React from 'react';
-import { useRedux, useSelect } from './store';
+import { useAsyncRedux, useSelect } from './store';
 
 const selectClick = state => state.click;
 
+const handleAsyncron = (dispatch) => {
+  setTimeout(() => {
+    dispatch({
+      type: 'TEST',
+      payload: 'done'
+    })
+  }, 1000);
+}
+
 function App() {
-  const [state, dispatch] = useRedux();
   const currentClickState = useSelect(selectClick);
+  useAsyncRedux(handleAsyncron);
+  //const [state, dispatch] = useRedux();
+
   return (
-    <h1 onClick={() => {dispatch({type: 'TEST', payload: 'hola'})}}>Hello {currentClickState}</h1>
+    <h1>Hello {currentClickState}</h1>
   );
 }
 

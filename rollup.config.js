@@ -48,9 +48,16 @@ export default {
                     'src/provider.tsx',
                     'src/createStore.ts',
                     'src/combineReducers.ts',
-                    'src/constants.ts'
+                    'src/constants.ts',
+                    'src/applyMiddleware.ts',
                 ],
                 dest: 'example/src/redux-react-hook/',
+            },
+            {
+                files: [
+                    'src/asyncMiddleware/index.ts',
+                ],
+                dest: 'example/src/redux-react-hook/asyncMiddleware',
             },
         ]),
     ]
