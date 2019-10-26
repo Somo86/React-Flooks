@@ -33,6 +33,7 @@ export default {
             exclude: ['*.d.ts', '**/*.d.ts'],
         }),
         commonjs(),
+        process.env.BUILD === 'development' &&
         copy([
             // The example uses create-react-app (via create-react-library), which
             // doesn't work correctly with yarn or npm links. It will end up with

@@ -10,8 +10,8 @@
     "example": "examples"
   },
   "scripts": {
-    "start": "rollup -c -w",
-    "build": "rollup -c",
+    "start": "rollup -c -w --environment BUILD:development",
+    "build": "rollup -c --environment BUILD:production",
     "prettier": "prettier --config .prettierrc --write \"{src,example}/**/*.{js,ts,tsx}\"",
     "test": "npm run test"
   },
