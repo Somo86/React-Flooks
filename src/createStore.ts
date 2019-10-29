@@ -82,7 +82,7 @@ export function context<TAction>({
   function useSelect(selectFunc?: Function) {
     const { state } = useContext(StoreContext);
 
-    typeof selectFunc === 'function' 
+    return typeof selectFunc === 'function' 
       ? selectFunc(state)
       : state
   }
