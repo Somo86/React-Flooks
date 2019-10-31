@@ -13,7 +13,7 @@
     "start": "rollup -c -w --environment BUILD:development",
     "build": "rollup -c --environment BUILD:production",
     "prettier": "prettier --config .prettierrc --write \"{src,example}/**/*.{js,ts,tsx}\"",
-    "test": "BABEL_ENV=test jest",
+    "test": "BABEL_ENV=test jest --coverage",
     "test:watch": "BABEL_ENV=test jest --watch"
   },
   "author": "Albert Somoza",

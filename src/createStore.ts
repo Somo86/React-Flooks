@@ -60,7 +60,10 @@ export function context<TAction>({
     }
     // if applyMiddleware is used 
     // public same values adding any middleware hook
-    return enhancer(publicData);
+    return {
+      ...publicData,
+      ...enhancer(useRedux) 
+    };
   }
 
   

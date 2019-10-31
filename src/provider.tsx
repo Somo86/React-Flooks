@@ -1,4 +1,4 @@
-import React, { useReducer, useEffect } from 'react';
+import React, { useReducer } from 'react';
 import { INITIAL_ACTION } from './constants';
 
 export default function Provider(Context) {
@@ -11,17 +11,18 @@ export default function Provider(Context) {
 
     const { preloadedState, reducer } = store;
     const [state, dispatch] = useReducer(reducer, preloadedState);
-
-    useEffect(() => {
-      
+    React.useEffect(() => {
+      /** Dispatch initial action */
       dispatch({
         type: INITIAL_ACTION
       });
-
     }, []);
 
+
+    const values = React.useMemo(() => ({state, dispatch}), [state])
+    
     return (
-      <Context.Provider value={{state, dispatch}}>
+      <Context.Provider value={values}>
         { children }
       </Context.Provider>
     );

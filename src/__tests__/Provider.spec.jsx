@@ -1,22 +1,24 @@
 import store from '../createStore';
 import Provider from '../provider';
+import { INITIAL_ACTION } from '../constants';
 
-describe('store component', () => {  
-  let wrapper;
+describe('store component', () => {
+  const actionMock = jest.fn();
+  const reducer = (state, action) => actionMock.mockReturnValueOnce(action);
+  const initialState = { test: 'state test' };
   let storeMount;
-  const reducer = () => {};
-  const initialState = {
-    test: 'state test'
-  };
 
-  beforeAll(() => {
+  beforeEach(() => {
+    const ProviderComp = Provider({Provider: ({children}) => <h1>{children}</h1>})
+    
     React.useContext = () => ({ state: initialState, dispatch: jest.fn() });
     storeMount = store(reducer, initialState);
-    wrapper = mount(
-        <Provider store={ storeMount.store }>
-          <div>test</div>          
-        </Provider>
-    );
+    
+    mount(
+      <ProviderComp store={ storeMount.store }>
+        <div>test</div>          
+      </ProviderComp>
+    )
   });
 
   it('useSelect should return current state', () => {
@@ -36,6 +38,15 @@ describe('store component', () => {
     const [state, dispatch] = storeMount.useRedux();
     expect(state).toBeDefined();
     expect(dispatch).toBeDefined();
+  });
+
+  it('should throw error if store is empty', () => {
+    expect(() => Provider()()).toThrow();
+  });
+
+  it('should dispatch initial action after mount', () => {
+    const action = actionMock();
+    expect(action.type).toBe(INITIAL_ACTION);
   });
 
 });
