@@ -40,6 +40,7 @@ export function context<TAction>({
 }) {
   
   const StoreContext = createContext<any>(null);
+  let listeners: Function[] = [];
   const store = {
     reducer,
     preloadedState,
@@ -51,7 +52,8 @@ export function context<TAction>({
     Provider: Provider(StoreContext),
     useRedux,
     useSelect,
-    useDispatch
+    useDispatch,
+    useSubscribe
   };
 
   if(typeof enhancer !== 'undefined') {
@@ -72,10 +74,14 @@ export function context<TAction>({
    */
   function useRedux(): any[] {
     const {state, dispatch} = useContext(StoreContext);
+    const getState = () => state;
 
     return [
-      state,
-      (action: TAction | IAction) => dispatch(action)
+      getState,
+      (action: TAction | IAction) => {
+        dispatch(action);
+        runListeners();
+      }
     ];
   }
 
@@ -95,7 +101,24 @@ export function context<TAction>({
    */
   function useDispatch() {
     const { dispatch } = useContext(StoreContext);
-    return dispatch;
+    return action => {
+      dispatch(action);
+      runListeners();
+    };
+  }
+
+  function runListeners() {
+    listeners.forEach(listener => listener());
+  }
+
+  function useSubscribe(listener) {
+    if(typeof listener !== 'function') {
+      throw new Error('subscriber needs to be a function');
+    }
+    listeners.push(listener);
+    return () => {
+      listeners = listeners.filter(l => l !== listener);
+    }
   }
 
   return publicData;
